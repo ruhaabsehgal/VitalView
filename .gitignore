@@ -1,0 +1,16 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Uploaded files
+backend/uploads/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
