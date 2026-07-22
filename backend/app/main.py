@@ -1,6 +1,8 @@
 from fastapi import FastAPI, UploadFile, File
 import shutil
 from pathlib import Path
+from app.services.pdf_service import extract_text_from_pdf
+
 
 app = FastAPI(
     title="VitalView API",
@@ -27,7 +29,10 @@ async def upload_pdf(file: UploadFile = File(...)):
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
+    extracted_text = extract_text_from_pdf(file_path)
+
     return {
         "message": "File uploaded successfully!",
-        "filename": file.filename
+        "filename": file.filename,
+        "text": extracted_text
     }
